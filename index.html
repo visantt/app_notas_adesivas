@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Glassmorphism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="toast-wrapper">
+        <div id="signup-success-toast" class="toast-container">
+            <div class="toast-content">
+                <i class="fas fa-check-circle"></i>
+                <div class="toast-text">
+                    <p class="toast-title">Sucesso!</p>
+                    <p class="toast-subtitle">Conta criada com sucesso! Faça seu login.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="login-error-toast" class="toast-container error">
+            <div class="toast-content">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="toast-text">
+                    <p class="toast-title">Ops!</p>
+                    <p id="error-message" class="toast-subtitle">E-mail não cadastrado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-box">
+        <form id="loginForm">
+            <h2>LOGIN</h2>
+            
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="email" id="username" required>
+                <label>E-mail</label>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" required>
+                <label>Senha</label>
+            </div>
+            
+            <button type="submit" class="login-btn" id="submitBtn">SIGN IN</button>
+            
+            <p class="signup-link">
+                New here? <a href="signup.html">Create Account</a>
+            </p>
+        </form>
+    </div>
+
+    <div id="error-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <i class="fas fa-user-times"></i>
+            <h3>E-mail não cadastrado!</h3>
+            <p>Não encontramos nenhuma conta com este e-mail. Deseja criar uma agora?</p>
+            <div class="modal-buttons">
+                <button class="login-btn" onclick="window.location.href='signup.html'">IR PARA CADASTRO</button>
+                <button class="login-btn secondary" onclick="closeErrorModal()">VOLTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+:root {
+    --primary-color: #DB7093;
+    --bg-image: url('https://i.pinimg.com/736x/38/92/ce/3892ceb60459c34563a122adf4620ccc.jpg');
+}
+
+body.theme-blue { --primary-color: #040568; --bg-image: url('https://i.pinimg.com/736x/13/ae/0b/13ae0bd8de57fa10dd5833280f1f3051.jpg'); }
+body.theme-dark { --primary-color: #313131; --bg-image: url('https://i.pinimg.com/736x/90/c6/e5/90c6e50957bb3c597a79f984e7db3ac9.jpg'); }
+body.theme-sunset { --primary-color: #ad2300; --bg-image: url('https://i.pinimg.com/1200x/ac/3f/0d/ac3f0d1547f2275551403c68c478d5e8.jpg'); }
+
+body {
+    background: var(--bg-image) no-repeat center center fixed !important;
+    background-size: cover !important;
+    transition: 0.5s ease;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.dashboard-main { display: flex; gap: 30px; padding: 100px 30px 30px; justify-content: center; align-items: flex-start; }
+.sidebar-lists { flex: 1; max-width: 400px; display: flex; flex-direction: column; gap: 20px; }
+.creation-container { flex: 1; max-width: 450px; }
+
+.user-header {
+    position: fixed; top: 0; width: 100%; padding: 15px 40px; display: flex;
+    justify-content: space-between; align-items: center; z-index: 100;
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); box-sizing: border-box;
+}
+
+.list-box {
+    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
+    border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.2);
+    color: white; max-height: 300px; overflow-y: auto;
+}
+
+.task-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px; background: rgba(255,255,255,0.05); border-radius: 10px;
+    margin-bottom: 10px; transition: 0.3s;
+}
+
+.task-actions { display: flex; gap: 12px; }
+.task-actions i { cursor: pointer; opacity: 0.7; transition: 0.2s; }
+.task-actions i:hover { opacity: 1; color: var(--primary-color); }
+
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+    display: none; justify-content: center; align-items: center; z-index: 2000;
+}
+
+.modal-box { background: #FFB6C1; padding: 30px; border-radius: 15px; text-align: center; width: 320px; }
+
+.toast-container {
+    position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 12px;
+    padding: 15px 25px; z-index: 9999; transition: 0.5s;
+}
+.toast-container.show { top: 20px; }
+
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+
+/* Header */
+.user-header span, .user-header { color: white; }
+.user-info { display: flex; align-items: center; gap: 12px; }
+
+.logout-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    transition: 0.3s;
+}
+.logout-btn:hover { background: rgba(255,255,255,0.25); }
+
+/* Avatar / Upload de foto no perfil */
+.profile-upload-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.avatar-wrapper img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.3);
+}
+
+.upload-pencil {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.upload-pencil:hover { transform: scale(1.1); }
+.upload-pencil i { color: white; font-size: 13px; }
+
+/* Botões do modal de perfil */
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Categorias de cor da tarefa */
+.category-selector { margin-bottom: 20px; }
+.category-selector p { font-size: 13px; color: white; opacity: 0.8; margin-bottom: 8px; }
+.colors { display: flex; gap: 10px; }
+.color-dot {
+    width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+    border: 3px solid transparent; transition: 0.2s;
+}
+.color-dot.active, .color-dot:hover { border-color: white; transform: scale(1.15); }
+
+/* Barra lateral de tarefas */
+.list-box h3 { color: white; margin-bottom: 15px; font-size: 15px; opacity: 0.9; }
+.task-item span { color: white; font-size: 14px; flex: 1; }
+.task-actions i { color: white; font-size: 15px; }

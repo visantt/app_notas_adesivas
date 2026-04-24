@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Glassmorphism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="signup-success-toast" class="toast-container">
+        <div class="toast-content">
+            <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+            <div class="toast-text">
+                <p class="toast-title">Sucesso!</p>
+                <p class="toast-subtitle">Conta criada! Você será redirecionado.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-box">
+        <form id="signupForm">
+            <h2>CRIAR CONTA</h2>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="signup-name" required>
+                <label>Nome Completo</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="signup-email" required>
+                <label>E-mail</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="signup-password" required>
+                <label>Senha</label>
+            </div>
+            <button type="submit" class="login-btn" id="signupBtn">CADASTRAR</button>
+            <p class="signup-link">
+                Já tem uma conta? <a href="index.html">Ir para o Login</a>
+            </p>
+        </form>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+</html>

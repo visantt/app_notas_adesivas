@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Minhas Tarefas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div id="welcome-toast" class="toast-container">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <div class="toast-text">
+                <p class="toast-title">Bem-vindo!</p>
+                <p id="user-display-name" class="toast-subtitle">Login realizado com sucesso.</p>
+            </div>
+        </div>
+    </div>
+    <div id="profile-success-toast" class="toast-container">
+        <div class="toast-content">
+            <i class="fas fa-user-check"></i>
+            <div class="toast-text">
+                <p class="toast-title">Sucesso!</p>
+                <p class="toast-subtitle">Perfil atualizado com sucesso!</p>
+            </div>
+        </div>
+    </div>
+    <header class="user-header">
+        <div class="user-info" onclick="openProfileModal()" style="cursor: pointer;">
+            <div id="header-avatar-container">
+                <img id="header-avatar" src="https://via.placeholder.com/40" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover; display: none;">
+                <i id="header-icon" class="fas fa-user-circle" style="font-size: 30px;"></i>
+            </div>
+            <span id="welcome-name">Carregando...</span>
+        </div>
+        <button onclick="localStorage.removeItem('lastLoggedUser'); window.location.href='index.html'" class="logout-btn">Sair</button>
+    </header>
+
+    <div id="profile-modal" class="modal-overlay">
+        <div class="login-box" style="width: 400px;">
+            <h2>EDITAR PERFIL</h2>
+            
+            <div class="profile-upload-container">
+                <div class="avatar-wrapper">
+                    <img id="profile-preview" src="https://via.placeholder.com/100" alt="Avatar">
+                    <label for="image-input" class="upload-pencil">
+                        <i class="fas fa-pencil-alt"></i>
+                    </label>
+                    <input type="file" id="image-input" accept="image/*" hidden>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="edit-name" required>
+                <label>Nome</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="edit-password" placeholder="Nova senha (opcional)">
+                <label>Nova Senha</label>
+            </div>
+
+            
+            <div class="theme-selector" style="margin-bottom: 25px;">
+            <p style="font-size: 13px; color: white; opacity: 0.8; margin-bottom: 10px;">Escolha o Tema:</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <div class="theme-option" onclick="setTheme('rose')" style="background: #DB7093; border: 2px solid white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;" title="Rosa Rose"></div>
+                <div class="theme-option" onclick="setTheme('blue')" style="background: #4facfe; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;" title="Céu Azul"></div>
+                <div class="theme-option" onclick="setTheme('dark')" style="background: #1e1e1e; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;" title="Modo Dark"></div>
+                <div class="theme-option" onclick="setTheme('sunset')" style="background: #ff7e5f; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;" title="Sunset"></div>
+            </div>
+            <div class="profile-actions">
+                <button class="login-btn" onclick="saveProfile()">SALVAR</button>
+                <button class="login-btn secondary" onclick="closeProfileModal()">CANCELAR</button>
+            </div>
+        </div>
+        </div>
+
+            
+        </div>
+        
+    </div>
+
+    <main class="dashboard-main">
+        <aside class="sidebar-lists">
+            <div class="note-card list-box">
+                <h3><i class="fas fa-list-ul"></i> To Do</h3>
+                <div id="todo-list" class="task-container"></div>
+            </div>
+
+            <div class="note-card list-box">
+                <h3><i class="fas fa-check-double"></i> Concluídas</h3>
+                <div id="completed-list" class="task-container"></div>
+            </div>
+        </aside>
+
+       <section class="creation-container">
+        <div class="login-box task-card">
+            <h2>NOVA TAREFA</h2>
+            <div class="input-group">
+                <i class="fas fa-pen"></i>
+                <input type="text" id="task-input" required>
+                <label>O que precisa ser feito?</label>
+            </div>
+            
+            <div class="category-selector">
+                <p>Categoria:</p>
+                <div class="colors">
+                    <label class="color-dot active" data-color="#DB7093" style="background: #DB7093;">
+                        <input type="radio" name="category" value="#DB7093" checked hidden>
+                    </label>
+                    <label class="color-dot" data-color="#4facfe" style="background: #4facfe;">
+                        <input type="radio" name="category" value="#4facfe" hidden>
+                    </label>
+                    <label class="color-dot" data-color="#00f2fe" style="background: #00f2fe;">
+                        <input type="radio" name="category" value="#00f2fe" hidden>
+                    </label>
+                    <label class="color-dot" data-color="#ffa751" style="background: #ffa751;">
+                        <input type="radio" name="category" value="#ffa751" hidden>
+                    </label>
+                </div>
+            </div>
+            <div class="date-selector" style="margin-bottom: 20px;">
+                <p style="font-size: 13px; color: white; opacity: 0.8; margin-bottom: 8px;">Prazo de entrega:</p>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" id="task-date" style="color: white; background: transparent; border: none; outline: none; width: 100%;">
+                </div>
+            </div>
+            <button id="add-task-btn" class="login-btn">Adicionar à Lista</button>
+        </div>
+    </section>
+    </main>
+
+    <div id="delete-modal-container" class="modal-overlay">
+        <div class="modal-box">
+            <i class="fas fa-exclamation-triangle" style="font-size: 30px; color: #DB7093; margin-bottom: 15px;"></i>
+            <h3>Excluir Tarefa?</h3>
+            <p style="font-size: 14px; margin: 10px 0 20px; opacity: 0.8;">Esta ação não pode ser desfeita.</p>
+            
+            <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:20px;">
+                <input type="checkbox" id="dont-show-again">
+                <label for="dont-show-again" style="font-size: 12px; cursor: pointer;">Não perguntar novamente</label>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button id="confirm-delete-btn" class="login-btn" style="padding: 10px;">Excluir</button>
+                <button id="cancel-delete-btn" class="login-btn" style="background: rgba(255,255,255,0.1); padding: 10px;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
